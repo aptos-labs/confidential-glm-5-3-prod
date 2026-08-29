@@ -1,42 +1,43 @@
-# Tinfoil Containers Template
+# Confidential GLM-5.3 production runtime
 
-A GitHub template repository for deploying a pre-built Docker image as a [Tinfoil Container](https://docs.tinfoil.sh/containers/overview) (in a secure enclave)
+This repository is the public, signed Tinfoil release provenance for the
+production GLM-5.3 confidential-inference CVM.
 
-Out of the box, this template deploys [`tinfoil-containers-hello-world`](https://github.com/tinfoilsh/tinfoil-containers-hello-world): a tiny HTTP server that reads a `MESSAGE` env var and a `GREETING_TOKEN` secret, and responds with both.
+## What is attested
 
-## Deploy It
+`tinfoil-config.yml` is the exact measured runtime exported from the production
+CVM specification. It pins the GLM-5.3 model reference and MPK, the vLLM image
+digest, resource allocation, and the complete vLLM command line.
 
-1. Click **[Use this template](https://github.com/tinfoilsh/tinfoil-containers-template/generate)** → **Create a new repository**
-2. In the [Tinfoil Dashboard](https://dash.tinfoil.sh), open the **Secrets** tab and add `GREETING_TOKEN` with any value
-3. Release a version by running the **Tinfoil Release** workflow:
-   - **CLI:** `gh workflow run tinfoil-release.yml -f version=v0.0.1`
-   - **UI:** **Actions** tab → **Tinfoil Release** → **Run workflow**, then enter the version
-4. **Containers** → **Deploy**, select your repo and tag, and click **Deploy**
+The release workflow uses Tinfoil's pinned measurement action to publish a
+Sigstore-signed deployment record and expected TDX measurements. A Tinfoil
+verifier compares those expected measurements with a fresh quote from the live
+CVM and verifies the attested TLS/HPKE key binding.
 
-Once running, `curl https://<container-name>.<org>.containers.tinfoil.dev` returns:
+## Release process
 
-```
-MESSAGE: <value from tinfoil-config.yml>
-GREETING_TOKEN: <present if secret exists>
-```
+1. Update the production `cvmctl` spec.
+2. Export its exact measured runtime:
 
-## Use your own image
+   ```bash
+   cvmctl export-runtime -f vm-glm-5.3-prod.yml > tinfoil-config.yml
+   ```
 
-1. If you have a prebuilt image, edit `tinfoil-config.yml` to point at the image you want to deploy: change `image:` to your `<repo>@sha256:<digest>`, adjust `env`/`secrets`/`shim` for your container, then release a new version.
-2. If you have your own code in a private repo, [`tinfoil-containers-hello-world`](https://github.com/tinfoilsh/tinfoil-containers-hello-world) shows the build-and-publish side and can be added to an existing repository.
-3. If you have your own code in a public repo, use the simple [`tinfoil-public-containers-template`](https://github.com/tinfoilsh/tinfoil-public-containers-template) for an all-in-one-repo example. Since the `tinfoil-config.yml` has to be public, public app code can live in the same repo as the config.
+3. Review and commit the generated `tinfoil-config.yml`.
+4. Run the **Tinfoil Release** workflow with a new immutable tag, for example
+   `v0.0.1`.
+5. Deploy that exact production specification, setting its metadata repository
+   and tag to this repository and release.
 
-## Updating
+Any runtime change—including the model, MPK, image digest, or vLLM arguments—
+requires a new release before deployment.
 
-Edit `tinfoil-config.yml`, commit, then release a new version (`gh workflow run tinfoil-release.yml -f version=v0.0.2`, or via the **Actions** tab). Then click **Update** in the dashboard. Each release creates an auditable record in the Sigstore transparency log.
+## Security boundaries
 
-## Documentation
+This repository intentionally contains no credentials. The certificate
+authorization token remains only in the protected host-side CVM specification.
 
-For the full configuration reference, secrets management, debug mode, and more:
-
-**[docs.tinfoil.sh/containers](https://docs.tinfoil.sh/containers/overview)**
-
-## Support
-
-- [Documentation](https://docs.tinfoil.sh)
-- [Email Support](mailto:contact@tinfoil.sh)
+The Tinfoil release attestation establishes that the live CVM matches this
+signed runtime configuration. It does not independently establish upstream
+model-weight-to-MPK provenance unless that mapping is separately provided and
+verified by the model packaging process.
