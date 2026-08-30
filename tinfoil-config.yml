@@ -45,10 +45,10 @@ containers:
   - --tool-call-parser=glm47
   - --reasoning-parser=glm45
   - --enable-auto-tool-choice
-  - --max-model-len=131072
+  - --max-model-len=262144
   - --enable-prefix-caching
   - --enable-prompt-tokens-details
-  - --gpu-memory-utilization=0.92
+  - --gpu-memory-utilization=0.95
   - --host=0.0.0.0
   - --port=8000
   healthcheck:
