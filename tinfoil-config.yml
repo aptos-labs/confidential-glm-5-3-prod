@@ -14,7 +14,8 @@ shim:
   tls-mode: cert-proxy
   tls-challenge: dns
   tls-own-san-domain: true
-  control-plane: https://ccs-public-api-0f44d76-687034466197.us-central1.run.app/
+  control-plane: https://api.inference.aptoslabs.com/
+  atc: http://10.0.2.2:8399
 cvm-network:
   inbound-ports:
   - 443
@@ -49,6 +50,7 @@ containers:
   - --enable-prefix-caching
   - --enable-prompt-tokens-details
   - --gpu-memory-utilization=0.95
+  - --kv-offloading-size=180
   - --host=0.0.0.0
   - --port=8000
   healthcheck:
