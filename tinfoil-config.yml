@@ -19,8 +19,8 @@ shim:
 cvm-network:
   inbound-ports:
   - 443
-cpus: 64
-memory: 524288
+cpus: 32
+memory: 393216
 gpus: 8
 models:
 - name: glm-5.3
