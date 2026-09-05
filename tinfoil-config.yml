@@ -20,7 +20,7 @@ cvm-network:
   inbound-ports:
   - 443
 cpus: 32
-memory: 393216
+memory: 262144
 gpus: 8
 models:
 - name: glm-5.3
@@ -50,7 +50,6 @@ containers:
   - --enable-prefix-caching
   - --enable-prompt-tokens-details
   - --gpu-memory-utilization=0.95
-  - --kv-offloading-size=180
   - --host=0.0.0.0
   - --port=8000
   healthcheck:
