@@ -10,7 +10,11 @@ shim:
   - /metrics
   dummy-attestation: false
   publish-attestation: false
-  authenticated: false
+  authenticated: true
+  authenticated-endpoints:
+  - /v1/chat/completions
+  - /v1/completions
+  - /v1/models
   tls-mode: cert-proxy
   tls-challenge: dns
   tls-own-san-domain: true
@@ -48,6 +52,7 @@ containers:
   - --enable-auto-tool-choice
   - --max-model-len=262144
   - --enable-prefix-caching
+  - --scheduling-policy=priority
   - --enable-prompt-tokens-details
   - --gpu-memory-utilization=0.95
   - --host=0.0.0.0
