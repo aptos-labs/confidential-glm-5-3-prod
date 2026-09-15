@@ -34,6 +34,10 @@ requires a new release before deployment.
 
 ## Security boundaries
 
+The shim requires authentication on `/v1/chat/completions`, `/v1/completions`,
+`/v1/models`, and `/metrics`. `/health` stays public; it is not proof of
+attestation or successful authenticated inference.
+
 This repository intentionally contains no credentials. The certificate
 authorization token remains only in the protected host-side CVM specification.
 

@@ -15,6 +15,7 @@ shim:
   - /v1/chat/completions
   - /v1/completions
   - /v1/models
+  - /metrics
   tls-mode: cert-proxy
   tls-challenge: dns
   tls-own-san-domain: true
