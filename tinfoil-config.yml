@@ -44,7 +44,9 @@ containers:
   - VLLM_LOGGING_LEVEL
   command:
   - --model=/tinfoil/mpk/mpk-616363157c9fd0450987e57e883e4676c3ac892802f2f4a000eeb2e4fcf88c0d
-  - --served-model-name=zai-org/GLM-5.3
+  - --served-model-name
+  - glm-5.3
+  - zai-org/GLM-5.3
   - --tensor-parallel-size=8
   - --kv-cache-dtype=fp8
   - --speculative-config={"method":"mtp","num_speculative_tokens":5}
