@@ -50,7 +50,7 @@ containers:
   - zai-org/GLM-5.3
   - --tensor-parallel-size=8
   - --kv-cache-dtype=fp8
-  - --speculative-config={"method":"mtp","num_speculative_tokens":5}
+  - --speculative-config={"method":"mtp","num_speculative_tokens":1}
   - --tool-call-parser=glm47
   - --reasoning-parser=glm45
   - --enable-auto-tool-choice
