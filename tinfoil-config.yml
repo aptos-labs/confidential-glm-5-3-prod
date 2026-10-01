@@ -25,7 +25,7 @@ cvm-network:
   inbound-ports:
   - 443
 cpus: 32
-memory: 262144
+memory: 917504
 gpus: 8
 models:
 - name: glm-5.3
@@ -58,7 +58,7 @@ containers:
   - --enable-prefix-caching
   - --scheduling-policy=priority
   - --enable-prompt-tokens-details
-  - --gpu-memory-utilization=0.95
+  - --gpu-memory-utilization=0.94
   - --decode-context-parallel-size=8
   - --dcp-comm-backend=ag_rs
   - --compilation-config={"cudagraph_mode":"FULL_DECODE_ONLY"}
