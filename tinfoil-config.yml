@@ -59,7 +59,7 @@ containers:
   - --scheduling-policy=priority
   - --enable-prompt-tokens-details
   - --gpu-memory-utilization=0.95
-  - --decode-context-parallel-size=4
+  - --decode-context-parallel-size=8
   - --dcp-comm-backend=ag_rs
   - --compilation-config={"cudagraph_mode":"FULL_DECODE_ONLY"}
   - --host=0.0.0.0
