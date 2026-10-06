@@ -54,7 +54,7 @@ containers:
   - --tool-call-parser=glm47
   - --reasoning-parser=glm45
   - --enable-auto-tool-choice
-  - --max-model-len=262144
+  - --max-model-len=1048576
   - --enable-prefix-caching
   - --scheduling-policy=priority
   - --enable-prompt-tokens-details
