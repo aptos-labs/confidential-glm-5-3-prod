@@ -19,7 +19,7 @@ shim:
   tls-mode: cert-proxy
   tls-challenge: dns
   tls-own-san-domain: true
-  control-plane: https://api.inference.aptoslabs.com/
+  control-plane: https://api.inference.aptoslabs.com/backend/
   atc: http://10.0.2.2:8399
 cvm-network:
   inbound-ports:
