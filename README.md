@@ -38,6 +38,11 @@ The shim requires authentication on `/v1/chat/completions`, `/v1/completions`,
 `/v1/models`, and `/metrics`. `/health` stays public; it is not proof of
 attestation or successful authenticated inference.
 
+Since v0.0.15 the shim checks keys against the backend-only control-plane
+namespace (`control-plane: .../backend/`). That namespace rejects customer keys.
+Customers reach GLM-5.3 through `aptos-labs/confidential-inference-router`,
+which authenticates to this CVM with a scoped backend credential.
+
 This repository intentionally contains no credentials. The certificate
 authorization token remains only in the protected host-side CVM specification.
 
