@@ -58,6 +58,7 @@ containers:
   - --enable-prefix-caching
   - --scheduling-policy=priority
   - --enable-prompt-tokens-details
+  - --enable-request-id-headers
   - --gpu-memory-utilization=0.92
   - --decode-context-parallel-size=8
   - --dcp-comm-backend=ag_rs
